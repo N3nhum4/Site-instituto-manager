@@ -1,0 +1,945 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="shortcut icon" href="favicons/home.png" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/home.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instituto Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="./assets/image-fix.js"></script>
+    <script type="module" crossorigin src="./assets/index-ubpffTOl.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-Dt8ILfuY.css">
+  </head>
+  <body>
+    <div class="header-container">
+      <img src="./assets/Group 34.png" alt="Header" class="header-image">
+      <div class="header-content">
+        <nav class="header-menu">
+          <a href="#" class="menu-item" data-scroll="home">Home</a>
+          <a href="#" class="menu-item" data-scroll="programs">Programas</a>
+          <a href="#" class="menu-item" data-scroll="blog">Blog</a>
+          <a href="#" class="menu-item" data-scroll="contact">Contato</a>
+        </nav>
+        <a href="https://educacao.institutomanager.com.br/" class="davi-button-link" target="_blank">
+          <img src="./assets/Davi - Botaõ da area.png" alt="Área do Aluno">
+        </a>
+      </div>
+    </div>
+    <div id="root"></div>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100%;
+        background: #ffffff;
+        overflow-x: hidden;
+        font-family: 'Raleway', sans-serif;
+      }
+
+      #root {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+      }
+
+      div[data-node-id="19-28"] {
+        width: 1440px !important;
+        height: 3658px !important;
+        position: relative !important;
+      }
+
+      /* Container do header com posição relativa */
+      .header-container {
+        position: absolute !important;
+        top: 0px !important; /* Começar do topo da tela */
+        left: 0 !important;
+        width: 100% !important;
+        height: 150px !important;
+        z-index: 100 !important;
+      }
+
+      /* Substituir o header antigo pela nova imagem Group 34 */
+      .header-image {
+        width: 100% !important; /* Ocupar toda a largura da tela */
+        height: 100% !important; /* Ocupar toda a altura do container */
+        object-fit: cover !important; /* Cobrir toda a área */
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+
+      /* Container do conteúdo do header (menu + botão) */
+      .header-content {
+        position: absolute !important;
+        bottom: 20px !important;
+        right: 20px !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 30px !important; /* Espaço entre menu e botão */
+        z-index: 200 !important;
+      }
+
+      /* Menu de navegação */
+      .header-menu {
+        display: flex !important;
+        gap: 25px !important; /* Espaço entre os itens do menu */
+        align-items: center !important;
+      }
+
+      .menu-item {
+        color: #ffffff !important;
+        text-decoration: none !important;
+        font-family: 'Raleway', sans-serif !important;
+        font-size: 16px !important;
+        font-weight: 500 !important;
+        transition: color 0.3s ease !important;
+        white-space: nowrap !important;
+      }
+
+      .menu-item:hover {
+        color: #ff5e01 !important; /* Cor laranja no hover */
+      }
+
+      /* Botão Área do Aluno */
+      .davi-button-link {
+        transition: transform 0.3s ease !important; /* Animação suave */
+      }
+
+      .davi-button-link:hover {
+        transform: scale(1.05) !important; /* Efeito hover */
+      }
+
+      .davi-button-link img {
+        width: 200px !important; /* Tamanho ainda maior */
+        height: auto !important;
+        display: block !important;
+      }
+
+      /* Remover completamente o header antigo */
+      div[data-node-id="21-88"] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        position: absolute !important;
+        left: -9999px !important;
+      }
+
+      /* Remover barra laranja do topo */
+      div[data-node-id="19-32"] {
+        display: none !important;
+      }
+
+      /* Remover imagem do topo e substituir pela nossa */
+      img[data-node-id="21-86"] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        position: absolute !important;
+        left: -9999px !important;
+      }
+
+      /* Remover texto "Área do aluno" */
+      div[data-node-id="19-75"] {
+        display: none !important;
+      }
+
+      /* CORRECAO 1: Ajustar tamanho das imagens dos programas (remover scale exagerado) */
+      img[src*="jovemempreendedor"],
+      img[src*="Jovemdoagro"],
+      img[src*="kids"],
+      img[src*="Googlepartner"] {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+        background: transparent !important;
+        padding: 0 !important;
+      }
+
+      /* Remover textos sobrepostos nos cards de programas */
+      div[data-node-id="21-180"] > div:nth-child(2),
+      div[data-node-id="21-181"] > div:nth-child(2),
+      div[data-node-id="21-183"] > div:nth-child(2),
+      div[data-node-id="21-197"] > div:nth-child(2) {
+        display: none !important;
+      }
+
+      /* Exibir os cards como vitrines verticais */
+      div[data-node-id="21-180"] > div:first-child,
+      div[data-node-id="21-181"] > div:first-child,
+      div[data-node-id="21-183"] > div:first-child,
+      div[data-node-id="21-197"] > div:first-child {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: visible !important;
+        background: transparent !important;
+      }
+
+      /* Configuração dos cards dos programas - sem animações */
+      div[data-node-id="21-180"],
+      div[data-node-id="21-181"],
+      div[data-node-id="21-183"],
+      div[data-node-id="21-197"] {
+        cursor: pointer !important;
+        position: relative !important;
+        overflow: visible !important;
+        background: transparent !important;
+      }
+
+      div[data-node-id="21-180"]::before,
+      div[data-node-id="21-181"]::before,
+      div[data-node-id="21-183"]::before,
+      div[data-node-id="21-197"]::before {
+        content: none !important;
+        display: none !important;
+      }
+
+      /* Remover todas as animações e efeitos hover */
+      div[data-node-id="21-180"]:hover,
+      div[data-node-id="21-181"]:hover,
+      div[data-node-id="21-183"]:hover,
+      div[data-node-id="21-197"]:hover {
+        transform: none !important;
+        box-shadow: none !important;
+      }
+
+      div[data-node-id="21-180"]:active,
+      div[data-node-id="21-181"]:active,
+      div[data-node-id="21-183"]:active,
+      div[data-node-id="21-197"]:active {
+        transform: none !important;
+      }
+
+      /* Remover animações nas imagens dos programas */
+      div[data-node-id="21-180"] img,
+      div[data-node-id="21-181"] img,
+      div[data-node-id="21-183"] img,
+      div[data-node-id="21-197"] img {
+        transition: none !important;
+        will-change: auto !important;
+      }
+
+      div[data-node-id="21-180"]:hover img,
+      div[data-node-id="21-181"]:hover img,
+      div[data-node-id="21-183"]:hover img,
+      div[data-node-id="21-197"]:hover img {
+        transform: none !important;
+        filter: none !important;
+      }
+
+      img[data-node-id="30-119"],
+      img[data-node-id="37-2"] {
+        display: none !important;
+        pointer-events: none !important;
+      }
+
+      /* HERO (banner principal) */
+      div[data-node-id="21-109"] {
+        position: absolute !important;
+        top: 100px !important; /* Posicionar logo abaixo da imagem */
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: min(100%, 1440px) !important;
+        height: clamp(360px, 42vw, 615px) !important;
+        border-radius: 29px !important;
+        overflow: hidden !important;
+        background-image: url('./assets/banner-BH_I7zbG.png') !important;
+        background-size: cover !important;
+        background-position: center !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        padding: clamp(32px, 6vw, 95px) clamp(32px, 7vw, 95px) !important;
+        z-index: 50 !important; /* Z-index menor que a imagem do header */
+      }
+
+      div[data-node-id="21-109"]::before {
+        content: '' !important;
+        position: absolute !important;
+        inset: 0 !important;
+        background: linear-gradient(90deg, #071d49 4.32%, rgba(10, 50, 128, 0.65) 77.43%) !important;
+      }
+
+      /* Ensure images inside the aligned programs flex container size correctly */
+      #programs-flex-container img {
+        width: 100% !important;
+        height: auto !important; /* override previous 100% height */
+        object-fit: contain !important;
+        background: transparent !important;
+        will-change: transform !important;
+      }
+
+      /* Give the cards explicit, responsive dimensions to avoid collapse */
+      #programs-flex-container > [data-node-id] {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: clamp(380px, 32vw, 400px) !important;
+        height: clamp(320px, 30vw, 360px) !important;
+        overflow: visible !important;
+        border-radius: 0 !important;
+      }
+
+      .codex-hero {
+        position: relative !important;
+        z-index: 1 !important;
+        color: #ffffff !important;
+        max-width: min(90%, 560px) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: clamp(16px, 4vw, 28px) !important;
+      }
+
+      .codex-hero__tag {
+        font-family: 'Raleway', sans-serif !important;
+        font-size: clamp(18px, 2vw, 27px) !important;
+        font-weight: 700 !important;
+        letter-spacing: -0.06em !important;
+        text-transform: uppercase !important;
+      }
+
+      .codex-hero__title {
+        font-family: 'Raleway', sans-serif !important;
+        font-size: clamp(34px, 5vw, 62px) !important;
+        line-height: clamp(40px, 6vw, 72px) !important;
+        font-weight: 700 !important;
+        letter-spacing: -0.06em !important;
+      }
+
+      .codex-hero__cta {
+        width: fit-content !important;
+        padding: clamp(10px, 1.5vw, 14px) clamp(28px, 4vw, 38px) !important;
+        border-radius: 8px !important;
+        background: #ff5e01 !important;
+        color: #071d49 !important;
+        font-family: 'Raleway', sans-serif !important;
+        font-size: clamp(18px, 2.4vw, 26px) !important;
+        font-weight: 700 !important;
+        border: none !important;
+        box-shadow: 5px 7px 6px rgba(0, 0, 0, 0.4) !important;
+        cursor: pointer !important;
+      }
+
+      /* CORRECAO 2: Substituir secao do app pela nova imagem */
+      /* Estrategia: Ocultar TODOS os elementos da secao e substituir pelo background */
+      
+      /* Alvo principal: DIV com data-node-id="21-232" - container da seção do app */
+      div[data-node-id="21-232"] {
+        background-image: url('./assets/app.png') !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        position: absolute !important;
+        top: 1270px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        overflow: hidden !important;
+        width: min(100%, 1440px) !important;
+        height: clamp(540px, 56vw, 858px) !important;
+        border-radius: 29px !important;
+      }
+
+      /* Ocultar TODOS os elementos filhos do container principal */
+      div[data-node-id="21-232"] > * {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+      }
+
+      /* Alvo secundário: DIV com classe específica (fallback) */
+      .w-\[1441\.94px\]\.h-\[615px\]\.left-0\.top-\[0\.44px\]\.absolute\.bg-\[\#efefef\]\.rounded-\[29px\],
+      div[data-node-id="21-234"] {
+        background-image: url('./assets/app.png') !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        width: 100% !important;
+        height: 615px !important;
+      }
+
+      /* Ocultar todos os elementos filhos */
+      .w-\[1441\.94px\]\.h-\[615px\]\.left-0\.top-\[0\.44px\]\.absolute\.bg-\[\#efefef\]\.rounded-\[29px\] > *,
+      div[data-node-id="21-234"] > * {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+      }
+
+      /* Ocultar especificamente todos os textos e ícones da seção do app */
+      div[data-node-id="21-255"],  /* Plataforma exclusiva */
+      div[data-node-id="22-267"],  /* Moedas digital exclusiva */
+      div[data-node-id="22-269"],  /* Banco de talentos */
+      div[data-node-id="22-271"],  /* Ensino gameficado */
+      div[data-node-id="23-279"],  /* IA integrada exclusiva */
+      div[data-node-id="21-257"],  /* Uma plataforma gamificada... */
+      div[data-node-id="23-281"],  /* Ícone 1 */
+      div[data-node-id="23-286"],  /* Ícone 2 */
+      div[data-node-id="23-288"],  /* Ícone 3 */
+      img[data-node-id="23-296"],  /* Ícone 4 */
+      img[data-node-id="23-282"],  /* Ícone 5 */
+      img[data-node-id="21-250"]   /* Imagem do celular original */
+      {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+
+      /* Garantir que a imagem de fundo cubra toda a área */
+      div[data-node-id="21-232"]::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        background-image: url('./assets/app.png') !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        z-index: 0 !important;
+        pointer-events: none !important;
+      }
+
+      /* Garantir que todos os elementos filhos fiquem atrás do pseudo-elemento */
+      div[data-node-id="21-232"] > * {
+        z-index: 0 !important;
+      }
+
+      @media (max-width: 1180px) {
+        .header-container {
+          top: 0px !important; /* Manter no topo */
+          height: 120px !important;
+        }
+        
+        div[data-node-id="21-109"] {
+          top: 80px !important; /* Ajustar para nova posição */
+          width: calc(100% - 48px) !important;
+        }
+
+        div[data-node-id="21-232"] {
+          top: 1202px !important;
+          width: calc(100% - 32px) !important;
+        }
+      }
+
+      /* Substituir imagem do rodapé */
+      img[src*="footer"], 
+      img[src*="u2Naf2Wr"] {
+        display: block !important;
+      }
+
+      @media (max-width: 768px) {
+        .header-container {
+          top: 0px !important; /* Manter no topo no mobile também */
+          height: 100px !important;
+        }
+        
+        div[data-node-id="21-109"] {
+          top: 70px !important; /* Ajustar para nova posição */
+          padding: 24px !important;
+        }
+
+        .codex-hero {
+          max-width: 100% !important;
+        }
+
+        div[data-node-id="21-232"] {
+          top: 1082px !important;
+          height: clamp(440px, 70vw, 640px) !important;
+        }
+
+        /* Ajustar menu e botão para mobile */
+        .header-content {
+          bottom: 15px !important;
+          right: 15px !important;
+          gap: 20px !important; /* Menor espaço no mobile */
+          flex-direction: column !important; /* Empilhar verticalmente */
+          align-items: flex-end !important;
+        }
+
+        .header-menu {
+          gap: 15px !important; /* Menor espaço entre itens */
+        }
+
+        .menu-item {
+          font-size: 14px !important; /* Texto menor no mobile */
+        }
+
+        .davi-button-link img {
+          width: 150px !important; /* Tamanho ainda maior no mobile */
+        }
+      }
+    </style>
+
+    
+    <script>
+      // JavaScript para remover completamente os elementos da seção do app após o carregamento
+      function replaceAppSection() {
+        // Lista de todos os data-node-ids que devem ser removidos
+        const nodeIdsToRemove = [
+          '21-255', // Plataforma exclusiva
+          '22-267', // Moedas digital exclusiva
+          '22-269', // Banco de talentos
+          '22-271', // Ensino gameficado
+          '23-279', // IA integrada exclusiva
+          '21-257', // Uma plataforma gamificada...
+          '23-281', // Ícone 1
+          '23-286', // Ícone 2
+          '23-288', // Ícone 3
+          '23-296', // Ícone 4
+          '23-282', // Ícone 5
+          '21-250', // Imagem do celular original
+          '21-234'  // DIV de fundo cinza
+        ];
+
+        // Remover todos os elementos com os data-node-ids especificados
+        nodeIdsToRemove.forEach(nodeId => {
+          const elements = document.querySelectorAll(`[data-node-id="${nodeId}"]`);
+          elements.forEach(el => {
+            if (el) {
+              el.remove();
+            }
+          });
+        });
+
+        // Aplicar a imagem de fundo ao container principal
+        const appContainer = document.querySelector('[data-node-id="21-232"]');
+        if (appContainer) {
+          appContainer.style.backgroundImage = 'url("./assets/app.png")';
+          appContainer.style.backgroundSize = 'cover';
+          appContainer.style.backgroundRepeat = 'no-repeat';
+          appContainer.style.backgroundPosition = 'center';
+          appContainer.style.overflow = 'hidden';
+          
+          // Remover todos os filhos restantes
+          while (appContainer.firstChild) {
+            appContainer.removeChild(appContainer.firstChild);
+          }
+        }
+      }
+
+      const BASE_LAYOUT = { width: 1440, height: 3658 };
+      let resizeRaf = null;
+
+      function buildHeroSection() {
+        const heroContainer = document.querySelector('[data-node-id="21-109"]');
+        if (!heroContainer || heroContainer.getAttribute('data-codex-hero') === 'true') {
+          return;
+        }
+
+        heroContainer.replaceChildren();
+        heroContainer.insertAdjacentHTML('afterbegin', `
+          <div class="codex-hero">
+            <span class="codex-hero__tag">Escola de empreendedorismo</span>
+            <h1 class="codex-hero__title">Formando a pr&oacute;xima gera&ccedil;&atilde;o de empreendedores.</h1>
+            <button class="codex-hero__cta" type="button">Quero fazer parte!</button>
+          </div>
+        `);
+        heroContainer.setAttribute('data-codex-hero', 'true');
+      }
+
+      function scaleLayout() {
+        const frame = document.querySelector('[data-node-id="19-28"]');
+        if (!frame) {
+          return;
+        }
+
+        const viewportWidth = window.innerWidth;
+        const rawScale = viewportWidth / BASE_LAYOUT.width;
+        const scale = Math.min(Math.max(rawScale, 0.01), 1.45);
+
+        frame.style.transform = `scale(${scale})`;
+        frame.style.transformOrigin = 'top center';
+
+        const scaledHeight = BASE_LAYOUT.height * scale;
+        const targetHeight = Math.max(scaledHeight, window.innerHeight);
+        const root = document.getElementById('root');
+        if (root) {
+          root.style.height = `${targetHeight}px`;
+          root.style.minHeight = `${targetHeight}px`;
+        }
+        document.body.style.minHeight = `${targetHeight}px`;
+
+        // realign programs after scaling to keep responsiveness
+        try { alignPrograms(); } catch (e) {}
+      }
+
+      function alignPrograms() {
+        const frame = document.querySelector('[data-node-id="19-28"]');
+        const jovemempreendedor = document.querySelector('[data-node-id="21-180"]');
+        const jovemdoagro = document.querySelector('[data-node-id="21-181"]');
+        const managerkids = document.querySelector('[data-node-id="21-183"]');
+        const parther = document.querySelector('[data-node-id="21-197"]');
+
+        if (!frame || !jovemempreendedor || !jovemdoagro || !managerkids || !parther) return;
+
+        // Calcular o espaço disponível entre o banner e a imagem do app
+          const bannerEnd = 770; // Aproximadamente onde termina o banner
+          const appStart = 1270; // Aproximadamente onde começa a imagem do app
+          const availableSpace = appStart - bannerEnd;
+          
+          // Posicionar logo após o banner com um espaço adicional para baixo
+          const detectedTop = (bannerEnd + 50) + 'px';
+
+        let flexContainer = document.getElementById('programs-flex-container');
+        if (!flexContainer) {
+          flexContainer = document.createElement('div');
+          flexContainer.id = 'programs-flex-container';
+          // Position this strip inside the fixed 1440px frame and center it
+          flexContainer.style.position = 'absolute';
+          flexContainer.style.top = detectedTop;
+          flexContainer.style.left = '50%';
+          flexContainer.style.transform = 'translateX(-50%)';
+          flexContainer.style.display = 'flex';
+          flexContainer.style.justifyContent = 'space-between'; // Distribuir igualmente
+          flexContainer.style.alignItems = 'center';
+          flexContainer.style.gap = '0px'; // Sem espaçamento entre os botões
+          flexContainer.style.width = '100%';
+          flexContainer.style.maxWidth = '1440px';
+          flexContainer.style.height = (availableSpace - 20) + 'px'; // Altura para ocupar todo o espaço disponível
+          flexContainer.style.zIndex = '50';
+          frame.appendChild(flexContainer);
+        }
+
+        // Substituir as imagens pelos novos botões
+        const imageMap = {
+          '21-180': './imagen do botoes dos pogrmas/davi - jovem emprendedor.png', // Jovem Empreendedor
+          '21-181': './imagen do botoes dos pogrmas/davi - Jovem do agro.png',     // Jovem do Agro
+          '21-183': './imagen do botoes dos pogrmas/davi - kids.png',              // Manager Kids
+          '21-197': './imagen do botoes dos pogrmas/davi - Google partner.png'     // Google Partner
+        };
+
+        const cards = [jovemempreendedor, jovemdoagro, managerkids, parther];
+        const cardWidth = Math.floor(1440 / cards.length); // Dividir o espaço igualmente
+
+        cards.forEach((card) => {
+          // Reset any absolute positioning coming from the export
+          card.style.position = 'relative';
+          card.style.top = 'auto';
+          card.style.left = 'auto';
+          card.style.transform = 'none';
+          card.style.margin = '0';
+          card.style.width = cardWidth + 'px'; // Largura exata para ocupar todo o espaço
+          card.style.height = '100%'; // Altura total do container
+          card.style.display = 'block';
+          card.style.visibility = 'visible';
+          card.style.opacity = '1';
+          card.style.pointerEvents = 'auto';
+          card.style.padding = '0';
+          card.style.boxSizing = 'border-box';
+          
+          // Ensure inner content centers nicely
+          if (card.firstElementChild) {
+            const inner = card.firstElementChild;
+            inner.style.display = 'flex';
+            inner.style.alignItems = 'center';
+            inner.style.justifyContent = 'center';
+            inner.style.overflow = 'hidden';
+            inner.style.background = 'transparent';
+            inner.style.width = '100%';
+            inner.style.height = '100%';
+            inner.style.padding = '0';
+            
+            // Substituir a imagem pela nova
+            const innerImg = inner.querySelector('img');
+            if (innerImg) {
+              const nodeId = card.getAttribute('data-node-id');
+              if (nodeId && imageMap[nodeId]) {
+                innerImg.src = imageMap[nodeId];
+              }
+              innerImg.style.width = '100%';
+              innerImg.style.height = '100%';
+              innerImg.style.objectFit = 'contain';
+              innerImg.style.padding = '0';
+            }
+          }
+          
+          if (card.parentElement !== flexContainer) {
+            flexContainer.appendChild(card);
+          }
+        });
+
+        // Responsive tweaks that will scale with the frame
+        const viewportWidth = window.innerWidth;
+        if (viewportWidth < 1024) {
+          flexContainer.style.maxWidth = '100%';
+          flexContainer.style.flexWrap = 'wrap';
+          cards.forEach(card => {
+            card.style.width = '50%'; // 2 por linha em telas menores
+            card.style.height = (availableSpace / 2) + 'px';
+          });
+        } else {
+          flexContainer.style.maxWidth = '1440px';
+          flexContainer.style.flexWrap = 'nowrap';
+        }
+      }
+
+      function removeOldHeaderImage() {
+        // Remover completamente o header antigo
+        const oldHeader = document.querySelector('div[data-node-id="21-88"]');
+        if (oldHeader) {
+          oldHeader.remove();
+        }
+        
+        // Remover completamente a imagem antiga do topo
+        const oldImage = document.querySelector('img[data-node-id="21-86"]');
+        if (oldImage) {
+          oldImage.remove();
+        }
+        
+        // Garantir que nossa imagem esteja visível
+        const ourImage = document.querySelector('.header-image');
+        if (ourImage) {
+          ourImage.style.display = 'block';
+          ourImage.style.visibility = 'visible';
+          ourImage.style.opacity = '1';
+        }
+      }
+
+      function replaceFooterImage() {
+        // Encontrar todas as imagens que contêm 'footer' no src
+        const footerImages = document.querySelectorAll('img[src*="footer"], img[src*="u2Naf2Wr"]');
+        footerImages.forEach(img => {
+          // Manter as mesmas dimensões e propriedades, apenas trocar a imagem
+          const oldWidth = img.width || img.style.width || '';
+          const oldHeight = img.height || img.style.height || '';
+          const oldStyle = img.style.cssText || '';
+          
+          // Substituir a imagem
+          img.src = './assets/DAVI - rODAPÉ PRONTO.jpg';
+          
+          // Restaurar dimensões se existiam
+          if (oldWidth) img.style.width = oldWidth;
+          if (oldHeight) img.style.height = oldHeight;
+        });
+      }
+
+      function initializeCustomizations() {
+        removeOldHeaderImage();
+        replaceAppSection();
+        buildHeroSection();
+        replaceFooterImage(); // Adicionar substituição do rodapé
+        scaleLayout();
+        alignPrograms(); // Execute alignment
+      }
+
+      // Executar após o DOM estar completamente carregado
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          setTimeout(initializeCustomizations, 100);
+          setTimeout(initializeCustomizations, 500);
+          setTimeout(initializeCustomizations, 1000);
+        });
+      } else {
+        setTimeout(initializeCustomizations, 100);
+        setTimeout(initializeCustomizations, 500);
+        setTimeout(initializeCustomizations, 1000);
+      }
+
+      // Observar mudanças no DOM e reaplicar a substituição
+      const observer = new MutationObserver(function(mutations) {
+        // Remover qualquer header antigo que apareça
+        const oldHeaders = document.querySelectorAll('div[data-node-id="21-88"]');
+        oldHeaders.forEach(header => header.remove());
+        
+        // Remover qualquer imagem antiga que apareça
+        const oldImages = document.querySelectorAll('img[data-node-id="21-86"]');
+        oldImages.forEach(img => img.remove());
+        
+        // Reaplicar substituição do rodapé quando houver mudanças
+        replaceFooterImage();
+        
+        initializeCustomizations();
+      });
+
+      // Iniciar observação quando o documento estiver pronto
+      window.addEventListener('load', function() {
+        const rootNode = document.getElementById('root');
+        if (rootNode) {
+          observer.observe(rootNode, { 
+            childList: true, 
+            subtree: true 
+          });
+        }
+        initializeCustomizations();
+      });
+
+      window.addEventListener('resize', function() {
+        if (resizeRaf) {
+          cancelAnimationFrame(resizeRaf);
+        }
+        resizeRaf = requestAnimationFrame(scaleLayout);
+      });
+
+      // Navegação para as páginas dos programas
+      function setupProgramNavigation() {
+        // Mapeamento dos data-node-ids para as páginas dos programas
+        const programLinks = {
+          '21-180': 'jovem-empreendedor/index.html',  // Jovem Empreendedor
+          '21-181': 'jovem-do-agro/index.html',       // Jovem do Agro
+          '21-183': 'manager-kids/index.html',        // Manager Kids
+          '21-197': 'parther/index.html'              // Parther (Google Partner)
+        };
+
+        // Adicionar event listeners aos cards dos programas
+        Object.keys(programLinks).forEach(nodeId => {
+          const programCard = document.querySelector(`[data-node-id="${nodeId}"]`);
+          if (programCard) {
+            programCard.style.cursor = 'pointer';
+            programCard.addEventListener('click', function() {
+              window.location.href = programLinks[nodeId];
+            });
+          }
+        });
+        
+        // O código para a imagem do blog foi removido
+      }
+
+      // Executar a configuração de navegação após o carregamento
+      window.addEventListener('load', function() {
+        setTimeout(setupProgramNavigation, 500);
+        setTimeout(setupProgramNavigation, 1000);
+        setTimeout(setupProgramNavigation, 2000);
+      });
+
+      // Função para rolar até uma seção baseado no hash da URL
+      function scrollToSectionFromHash() {
+        const hash = window.location.hash;
+        
+        if (hash === '#programs') {
+          // Aguardar um tempo para garantir que a página carregou completamente
+          setTimeout(() => {
+            const programsSection = document.querySelector('#programs-flex-container') || 
+                                  document.querySelector('[data-node-id="21-180"]');
+            if (programsSection) {
+              setTimeout(() => {
+                programsSection.scrollIntoView({ 
+                  behavior: 'smooth',
+                  block: 'start'
+                });
+              }, 500);
+            }
+          }, 2000);
+        } else if (hash === '#blog') {
+          setTimeout(() => {
+            const blogImage = document.querySelector('img[src*="blog"]') ||
+                            document.querySelector('[data-node-id="21-232"]');
+            if (blogImage) {
+              setTimeout(() => {
+                blogImage.scrollIntoView({ 
+                  behavior: 'smooth',
+                  block: 'start'
+                });
+              }, 500);
+            }
+          }, 2000);
+        }
+      }
+
+      // Navegação suave do menu
+      function setupSmoothNavigation() {
+        const menuItems = document.querySelectorAll('.menu-item[data-scroll]');
+        
+        menuItems.forEach(item => {
+          item.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = this.getAttribute('data-scroll');
+            
+            switch(target) {
+              case 'home':
+                // Recarregar a página
+                window.location.reload();
+                break;
+                
+              case 'programs':
+                // Rolar até a seção de programas (se já está na home)
+                if (window.location.pathname.includes('index.html') || window.location.pathname.endsWith('/')) {
+                  const programsSection = document.querySelector('#programs-flex-container') || 
+                                        document.querySelector('[data-node-id="21-180"]');
+                  if (programsSection) {
+                    programsSection.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
+                  }
+                } else {
+                  // Se não está na home, voltar para home com hash
+                  window.location.href = 'index.html#programs';
+                }
+                break;
+                
+              case 'blog':
+                // Rolar até o blog (se já está na home)
+                if (window.location.pathname.includes('index.html') || window.location.pathname.endsWith('/')) {
+                  const blogImage = document.querySelector('img[src*="blog"]') ||
+                                  document.querySelector('[data-node-id="21-232"]');
+                  if (blogImage) {
+                    blogImage.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
+                  }
+                } else {
+                  // Se não está na home, voltar para home com hash
+                  window.location.href = 'index.html#blog';
+                }
+                break;
+                
+              case 'contact':
+                // Rolar até o rodapé
+                const footer = document.querySelector('img[src*="footer"]') ||
+                              document.querySelector('footer') ||
+                              document.body;
+                if (footer) {
+                  footer.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'end'
+                  });
+                }
+                break;
+            }
+          });
+        });
+      }
+
+      // Executar navegação suave
+      window.addEventListener('load', function() {
+        setTimeout(setupSmoothNavigation, 100);
+        setTimeout(setupSmoothNavigation, 500);
+        setTimeout(setupSmoothNavigation, 1000);
+        
+        // Verificar se há hash na URL e rolar até a seção
+        scrollToSectionFromHash();
+      });
+      
+      // Verificar hash quando a página carrega
+      window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(scrollToSectionFromHash, 100);
+      });
+      
+      // Também verificar quando a página já está carregada
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        setTimeout(scrollToSectionFromHash, 100);
+      }
+      
+      // Verificar hash no carregamento
+      if (window.location.hash) {
+        setTimeout(scrollToSectionFromHash, 500);
+        setTimeout(scrollToSectionFromHash, 1000);
+        setTimeout(scrollToSectionFromHash, 2000);
+      }
+    </script>
+
+    <!-- Removed duplicate absolute-position alignment script to prevent conflicts -->
+
+    <!-- Removed Codex aligner debugging script to avoid overriding the flex alignment -->
+
+  </body>
+</html>

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parther</title>
+    <link rel="shortcut icon" href="../favicons/parnher.png" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicons/parnher.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .image-section {
+            width: 100%;
+            display: block;
+            line-height: 0;
+        }
+        
+        .image-section {
+            width: 100%;
+            display: block;
+            line-height: 0;
+            position: relative; /* Adiciona posicionamento relativo para z-index */
+        }
+        
+        .image-section img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            vertical-align: top;
+        }
+        
+        /* Ajuste para sobreposição da imagem 1 sobre a 2 */
+        .image-section:nth-child(1) {
+            z-index: 3; /* Garante que fique por cima da 2 */
+            margin-bottom: -30px; /* Valor de sobreposição, mais um pouco (ajuste final) */
+        }
+
+        /* Ajuste para sobreposição da imagem 2 sobre a 3 */
+        .image-section:nth-child(2) {
+            z-index: 2; /* Garante que fique por baixo da 1 e por cima da 3 */
+            margin-bottom: -20px; /* Valor de sobreposição */
+        }
+        
+        /* Ajuste para sobreposição da imagem 4 sobre a 3 */
+        .image-section:nth-child(4) {
+            z-index: 4; /* Garante que fique por cima da 3 */
+            position: relative;
+            margin-top: -30px; /* Valor de sobreposição */
+        }
+        
+        .image-section:nth-child(3) {
+            position: relative;
+            overflow: hidden; /* Garante que os elementos animados não vazem */
+        }
+        
+        .info-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3vw;
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: white;
+            font-family: 'Raleway', sans-serif;
+            opacity: 0;
+            animation: fadeInOverlay 1s ease-out 0.5s forwards;
+            overflow-y: auto;
+        }
+
+        @keyframes fadeInOverlay {
+            to { opacity: 1; }
+        }
+
+        .overlay-content {
+            max-width: 900px;
+            width: 100%;
+            text-align: left;
+            animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards;
+            transform: translateY(50px);
+            opacity: 0;
+        }
+
+        @keyframes slideInUp {
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .program-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 900;
+            color: #FF5E01;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(255, 94, 1, 0.3);
+        }
+
+        .program-subtitle {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 1rem;
+        }
+
+        .program-text {
+            font-size: clamp(1rem, 1.5vw, 1.1rem);
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .program-text ul {
+            list-style-position: inside;
+            padding-left: 1rem;
+        }
+
+        .program-text li {
+            margin-bottom: 1rem;
+        }
+        /* Estilos para a nova seção de apresentação do Partner */
+        .partner-presentation {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 3rem 5%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin: 2rem auto;
+            max-width: 1200px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .partner-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .google-logo {
+            display: flex;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -2px;
+        }
+        
+        .g-letter { color: #4285F4; }
+        .o-letter { color: #EA4335; }
+        .o2-letter { color: #FBBC05; }
+        .g2-letter { color: #4285F4; }
+        .l-letter { color: #34A853; }
+        .e-letter { color: #EA4335; }
+        
+        .partner-badge {
+            background: #4285F4;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin: 1rem auto;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(66, 133, 244, 0.3);
+        }
+        
+        .partner-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #202124;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+        
+        .partner-tagline {
+            font-size: 1.2rem;
+            color: #5f6368;
+            font-weight: 500;
+        }
+        
+        .partner-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: #202124;
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .partner-pillars {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .pillar {
+            flex: 1;
+            min-width: 280px;
+            max-width: 450px;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 5px solid;
+        }
+        
+        .pillar:nth-child(1) {
+            border-color: #4285F4;
+        }
+        
+        .pillar:nth-child(2) {
+            border-color: #34A853;
+        }
+        
+        .pillar:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pillar-icon {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        
+        .technology {
+            background: rgba(66, 133, 244, 0.1);
+            color: #4285F4;
+        }
+        
+        .technology::before {
+            content: '💻';
+        }
+        
+        .implementation {
+            background: rgba(52, 168, 83, 0.1);
+            color: #34A853;
+        }
+        
+        .implementation::before {
+            content: '🚀';
+        }
+        
+        .pillar h3 {
+            font-size: 1.5rem;
+            color: #202124;
+            margin-bottom: 1rem;
+        }
+        
+        .pillar p {
+            color: #5f6368;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .partner-mission {
+            background: linear-gradient(135deg, #4285F4 0%, #34A853 100%);
+            padding: 3rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+            color: white;
+            overflow: hidden;
+        }
+        
+        .partner-mission::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .partner-mission::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .mission-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .mission-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mission-content p {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+        
+        .partner-benefits {
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+        
+        .partner-benefits h2 {
+            font-size: 2rem;
+            color: #202124;
+            margin-bottom: 2rem;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .benefit {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .benefit:hover {
+            transform: translateY(-5px);
+        }
+        
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .tools {
+            background: rgba(251, 188, 5, 0.1);
+            color: #FBBC05;
+        }
+        
+        .tools::before {
+            content: '🔧';
+        }
+        
+        .skills {
+            background: rgba(234, 67, 53, 0.1);
+            color: #EA4335;
+        }
+        
+        .skills::before {
+            content: '🧠';
+        }
+        
+        .innovation {
+            background: rgba(52, 168, 83, 0.1);
+            color: #34A853;
+        }
+        
+        .innovation::before {
+            content: '💡';
+        }
+        
+        .benefit p {
+            color: #5f6368;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        .partner-cta {
+            background: linear-gradient(135deg, #EA4335 0%, #FBBC05 100%);
+            padding: 3rem;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .partner-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 0 0 0 100%;
+        }
+        
+        .partner-cta h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .partner-cta p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .partner-title {
+                font-size: 2rem;
+            }
+            
+            .google-logo {
+                font-size: 2.5rem;
+            }
+            
+            .partner-pillars {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .pillar, .benefit {
+                width: 100%;
+            }
+            
+            .partner-mission, .partner-cta {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-section"><img src="1.png" alt="Seção 1"></div>
+        <div class="image-section"><img src="2.png" alt="Seção 2"></div>
+        <div class="partner-presentation">
+            <div class="partner-header">
+                <div class="google-logo">
+                    <div class="g-letter">G</div>
+                    <div class="o-letter">o</div>
+                    <div class="o2-letter">o</div>
+                    <div class="g2-letter">g</div>
+                    <div class="l-letter">l</div>
+                    <div class="e-letter">e</div>
+                </div>
+                <div class="partner-badge">
+                    <span class="badge-text">PARTNER</span>
+                </div>
+                <h1 class="partner-title">Instituto Manager & Google for Education</h1>
+                <p class="partner-tagline">Transformando a educação através da tecnologia e inovação</p>
+            </div>
+            
+            <div class="partner-intro">
+                <p>A parceria entre o Instituto Manager e o Google for Education é uma colaboração estratégica focada na transformação digital da educação e no aprimoramento das experiências de ensino e aprendizado.</p>
+            </div>
+            
+            <div class="partner-pillars">
+                <div class="pillar">
+                    <div class="pillar-icon technology"></div>
+                    <h3>Tecnologia de Ponta</h3>
+                    <p>Acesso às ferramentas e plataformas educacionais mais avançadas do Google, proporcionando experiências de aprendizado inovadoras.</p>
+                </div>
+                
+                <div class="pillar">
+                    <div class="pillar-icon implementation"></div>
+                    <h3>Desenvolvimento e Implementação</h3>
+                    <p>Expertise do Instituto Manager em desenvolver e implementar soluções educacionais personalizadas para diferentes contextos.</p>
+                </div>
+            </div>
+            
+            <div class="partner-mission">
+                <div class="mission-content">
+                    <h2>Nossa Missão Conjunta</h2>
+                    <p>O Instituto Manager, com sua missão de fomentar o desenvolvimento e a excelência, encontrou no Google for Education — uma referência global em tecnologia para o aprendizado — o parceiro ideal para revolucionar a experiência educacional.</p>
+                </div>
+            </div>
+            
+            <div class="partner-benefits">
+                <h2>Um Novo Ecossistema de Oportunidades</h2>
+                <div class="benefits-grid">
+                    <div class="benefit">
+                        <div class="benefit-icon tools"></div>
+                        <p>Capacitar nossos educadores com as melhores ferramentas digitais do mundo</p>
+                    </div>
+                    
+                    <div class="benefit">
+                        <div class="benefit-icon skills"></div>
+                        <p>Preparar nossa juventude com as habilidades essenciais de criatividade, colaboração e pensamento crítico</p>
+                    </div>
+                    
+                    <div class="benefit">
+                        <div class="benefit-icon innovation"></div>
+                        <p>Reforçar o compromisso com a transformação digital e a inovação social</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="partner-cta">
+                <h2>Faça Parte desta Transformação</h2>
+                <p>Conheça como a parceria Instituto Manager e Google for Education está redefinindo o futuro da educação.</p>
+            </div>
+        </div>
+        <div class="image-section"><img src="4.png" alt="Seção 4"></div>
+    </div>
+    <script>
+        // Navegação de retorno à Home ao clicar na imagem 1
+        document.addEventListener('DOMContentLoaded', function() {
+            // REMOVIDO: primeira imagem não é mais clicável
+        });
+    </script>
+</body>
+</html>

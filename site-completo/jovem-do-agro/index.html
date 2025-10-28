@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jovem do Agro</title>
+    <link rel="shortcut icon" href="../favicons/jovem do agro.png" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicons/jovem do agro.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+        }
+
+        /* Primeira imagem com header sobreposto */
+        .header-section {
+            position: relative !important;
+        }
+
+        /* Container do conteúdo do header (menu + botão) */
+        .header-content {
+            position: absolute !important;
+            bottom: 20px !important;
+            right: 20px !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 30px !important;
+            z-index: 200 !important;
+        }
+
+        /* Menu de navegação */
+        .header-menu {
+            display: flex !important;
+            gap: 25px !important;
+            align-items: center !important;
+        }
+
+        .menu-item {
+            color: #ffffff !important;
+            text-decoration: none !important;
+            font-family: Arial, sans-serif !important;
+            font-size: 16px !important;
+            font-weight: 500 !important;
+            transition: color 0.3s ease !important;
+            white-space: nowrap !important;
+        }
+
+        .menu-item:hover {
+            color: #ff5e01 !important;
+        }
+
+        /* Botão Área do Aluno */
+        .davi-button-link {
+            transition: transform 0.3s ease !important;
+        }
+
+        .davi-button-link:hover {
+            transform: scale(1.05) !important;
+        }
+
+        .davi-button-link img {
+            width: 200px !important;
+            height: auto !important;
+            display: block !important;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .image-section {
+            width: 100%;
+            display: block;
+            line-height: 0;
+            position: relative; /* Necessário para o z-index e sobreposição */
+            z-index: 1; /* Z-index padrão */
+
+            /* Ajuste para "cortar" as laterais e igualar a largura da imagem 2 */
+            width: 99.5%; /* Reduz a largura do contêiner em 0.5% de cada lado */
+            margin-left: 0.25%; /* Centraliza o contêiner */
+            margin-right: 0.25%;
+            overflow: hidden; /* Garante que o excesso seja cortado */
+            
+            /* Ajuste para sobreposição vertical (todas sobrepõem a próxima) */
+            margin-bottom: -15px; /* Valor de sobreposição, ajuste se necessário */
+        }
+
+        /* Remove a margem inferior da última imagem para não afetar o layout */
+        .image-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .image-section img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            vertical-align: top;
+        }
+        
+        /* Ajustes específicos para a primeira imagem (1 sobrepondo 2) */
+        .image-section:nth-child(1) {
+            z-index: 5; /* Garante que a primeira fique por cima de todas */
+            margin-bottom: -30px; /* Aumenta a sobreposição da 1 sobre a 2 */
+            margin-top: 16px; /* Desce mais a imagem 1 */
+            width: 101%; /* Aumenta um pouquinho horizontalmente */
+            left: -0.5%; /* Centraliza após aumentar */
+        }
+        
+        .image-section:nth-child(1) img {
+            width: 100%;
+            height: auto;
+        }
+        
+        /* Ajustes específicos para a segunda imagem (2 sobrepondo 3) */
+        .image-section:nth-child(2) {
+            z-index: 4;
+            width: 101%; /* Aumenta um pouquinho horizontalmente */
+            left: -0.5%; /* Centraliza após aumentar */
+        }
+        .image-section:nth-child(2) img {
+            width: 100%;
+            height: auto;
+        }
+        
+        /* Ajustes específicos para a terceira imagem (3 sobrepondo 4) */
+        .image-section:nth-child(3) {
+            z-index: 3;
+        }
+        
+        /* Ajustes específicos para a quarta imagem (4 sobrepondo 5) */
+        .image-section:nth-child(4) {
+            z-index: 2;
+        }
+        
+        .image-section:nth-child(3) {
+            position: relative;
+            overflow: hidden; /* Garante que os elementos animados não vazem */
+        }
+        
+        .info-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3vw;
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: white;
+            font-family: 'Raleway', sans-serif;
+            opacity: 0;
+            animation: fadeInOverlay 1s ease-out 0.5s forwards;
+            overflow-y: auto;
+        }
+
+        @keyframes fadeInOverlay {
+            to { opacity: 1; }
+        }
+
+        .overlay-content {
+            max-width: 900px;
+            width: 100%;
+            text-align: left;
+            animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards;
+            transform: translateY(50px);
+            opacity: 0;
+        }
+
+        @keyframes slideInUp {
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .program-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 900;
+            color: #FF5E01;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(255, 94, 1, 0.3);
+        }
+
+        .program-subtitle {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 1rem;
+        }
+
+        .program-text {
+            font-size: clamp(1rem, 1.5vw, 1.1rem);
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .program-text ul {
+            list-style-position: inside;
+            padding-left: 1rem;
+        }
+
+        .program-text li {
+            margin-bottom: 1rem;
+        }
+
+        /* Estilos para o carrossel de imagens */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 397.43px;
+            margin: 0 auto;
+            background: #1C3817;
+            border-radius: 17.472px;
+            overflow: hidden;
+        }
+        
+        .carousel-title {
+            position: absolute;
+            top: 30px;
+            left: 50px;
+            font-family: 'Raleway';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 27.9033px;
+            line-height: 33px;
+            letter-spacing: -0.06em;
+            color: #FFFFFF;
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 10;
+        }
+        
+        .carousel-nav-button {
+            width: 19.61px;
+            height: 41.48px;
+            border: 4px solid #FFFFFF;
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(45deg);
+        }
+        
+        .carousel-nav-button.prev {
+            border-top: none;
+            border-right: none;
+            transform: rotate(45deg);
+        }
+        
+        .carousel-nav-button.next {
+            border-bottom: none;
+            border-left: none;
+            transform: rotate(45deg);
+        }
+        
+        .carousel-slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .carousel-slide {
+            min-width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 50px;
+        }
+        
+        .carousel-image {
+            box-sizing: border-box;
+            border: 4px solid #FFFFFF;
+            height: auto;
+        }
+        
+        .carousel-image.main {
+            width: 440px;
+            height: 293px;
+            order: 2; /* Coloca a imagem principal no meio */
+            margin: 0 20px;
+        }
+        
+        .carousel-image.secondary {
+            width: 295px;
+            height: 195px;
+            order: 1; /* Coloca a imagem secundária à esquerda */
+            align-self: center;
+        }
+        
+        .carousel-image.tertiary {
+            width: 270px;
+            height: 195px;
+            order: 3; /* Coloca a imagem terciária à direita */
+            align-self: center;
+        }
+
+        /* Estilos para a nova seção de apresentação do Jovem do Agro */
+        .agro-presentation {
+            background: linear-gradient(135deg, #ffffff 0%, #f5f9f2 100%);
+            padding: 3rem 5%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin: 2rem auto;
+            max-width: 1200px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .agro-presentation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(28, 56, 23, 0.1) 0%, rgba(28, 56, 23, 0.05) 100%);
+            border-radius: 0 0 0 100%;
+            z-index: 0;
+        }
+        
+        .agro-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .agro-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: #1C3817;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(28, 56, 23, 0.2);
+        }
+        
+        .agro-icon::before {
+            content: '🌱';
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .agro-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #1C3817;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .agro-tagline {
+            font-size: 1.2rem;
+            color: #5a7852;
+            font-weight: 500;
+        }
+        
+        .agro-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #333;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .highlight {
+            color: #1C3817;
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(28, 56, 23, 0.2);
+            border-radius: 2px;
+        }
+        
+        .agro-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .agro-card {
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .agro-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(28, 56, 23, 0.1);
+        }
+        
+        .methodology-icon::before {
+            content: '🌾';
+            font-size: 2rem;
+        }
+        
+        .learning-icon::before {
+            content: '👨‍👩‍👧‍👦';
+            font-size: 2rem;
+        }
+        
+        .decision-icon::before {
+            content: '🧠';
+            font-size: 2rem;
+        }
+        
+        .agro-card h3 {
+            font-size: 1.3rem;
+            color: #1C3817;
+            margin-bottom: 1rem;
+        }
+        
+        .agro-card p {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .agro-experience {
+            background: rgba(28, 56, 23, 0.05);
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .agro-experience h2 {
+            color: #1C3817;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .experience-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            list-style: none;
+        }
+        
+        .experience-list li {
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+            color: #444;
+            padding: 0.5rem 0;
+        }
+        
+        .check-icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            background: #1C3817;
+            border-radius: 50%;
+            position: relative;
+            flex-shrink: 0;
+        }
+        
+        .check-icon::before {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .agro-cta {
+            background: linear-gradient(135deg, #1C3817 0%, #2a5422 100%);
+            padding: 2.5rem;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .agro-cta h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .agro-cta p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-content {
+                bottom: 15px !important;
+                right: 15px !important;
+                gap: 20px !important;
+                flex-direction: column !important;
+                align-items: flex-end !important;
+            }
+
+            .header-menu {
+                gap: 15px !important;
+            }
+
+            .menu-item {
+                font-size: 14px !important;
+            }
+
+            .davi-button-link img {
+                width: 150px !important;
+            }
+
+            .agro-title {
+                font-size: 2.2rem;
+            }
+            
+            .agro-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .agro-card {
+                width: 100%;
+            }
+            
+            .experience-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-section header-section">
+            <img src="1.png" alt="Seção 1">
+            <div class="header-content">
+                <nav class="header-menu">
+                    <a href="#" class="menu-item" data-scroll="home">Home</a>
+                    <a href="#" class="menu-item" data-scroll="programs">Programas</a>
+                    <a href="#" class="menu-item" data-scroll="blog">Blog</a>
+                    <a href="#" class="menu-item" data-scroll="contact">Contato</a>
+                </nav>
+                <a href="https://educacao.institutomanager.com.br/" class="davi-button-link" target="_blank">
+                    <img src="BOTÃO DO AGRO.png" alt="Área do Aluno">
+                </a>
+            </div>
+        </div>
+        <div class="image-section"><img src="2.png" alt="Seção 2"></div>
+        <div class="agro-presentation">
+            <div class="agro-header">
+                <div class="agro-logo">
+                    <i class="agro-icon"></i>
+                </div>
+                <h1 class="agro-title">ESCOLA DO AGRO</h1>
+                <p class="agro-tagline">Formando a próxima geração de produtores rurais</p>
+            </div>
+            
+            <div class="agro-intro">
+                <p>O programa <strong>Jovem Agro</strong> foi criado para capacitar os jovens a entender e dominar as três áreas mais importantes do agronegócio: <span class="highlight">Empreendedorismo Rural</span>, <span class="highlight">Sucessão Familiar</span> e <span class="highlight">Gestão Financeira</span> na propriedade.</p>
+            </div>
+            
+            <div class="agro-cards">
+                <div class="agro-card">
+                    <div class="card-icon methodology-icon"></div>
+                    <h3>Metodologia Prática e Imersiva</h3>
+                    <p>Com mais de 14 módulos, o programa cobre desde os conceitos fundamentais do preparo do solo e do plantio até as complexidades da gestão e comercialização. Nossa metodologia é prática e imersiva, utilizando o Tripé da Educação Google.</p>
+                </div>
+                
+                <div class="agro-card">
+                    <div class="card-icon learning-icon"></div>
+                    <h3>Aprendizado Compartilhado</h3>
+                    <p>Em todas as aulas práticas, convidamos e integramos os familiares, promovendo uma conexão profunda e um aprendizado que constrói uma verdadeira integração familiar na propriedade.</p>
+                </div>
+                
+                <div class="agro-card">
+                    <div class="card-icon decision-icon"></div>
+                    <h3>Protagonismo nas Decisões</h3>
+                    <p>O aluno assume o papel de protagonista e toma decisões estratégicas, pensando como o proprietário da fazenda, comparando investimentos em diferentes tecnologias e equipamentos.</p>
+                </div>
+            </div>
+            
+            <div class="agro-experience">
+                <h2>Experiências Práticas</h2>
+                <ul class="experience-list">
+                    <li><span class="check-icon"></span> Aulas práticas na propriedade rural</li>
+                    <li><span class="check-icon"></span> Olimpíada Jovem do Agro</li>
+                    <li><span class="check-icon"></span> Manager Farm - Evento de celebração</li>
+                    <li><span class="check-icon"></span> Integração com a família</li>
+                </ul>
+            </div>
+            
+            <div class="agro-cta">
+                <h2>Transforme o futuro do agronegócio</h2>
+                <p>Junte-se ao programa Jovem Agro e faça parte da nova geração de líderes do campo.</p>
+            </div>
+        </div>
+        <div class="image-section">
+            <div class="carousel-container">
+                <h3 class="carousel-title">Confira algumas imagens:</h3>
+                <div class="carousel-nav">
+                    <button class="carousel-nav-button prev" id="prevBtn"></button>
+                    <button class="carousel-nav-button next" id="nextBtn"></button>
+                </div>
+                <div class="carousel-slides" id="carouselSlides">
+                    <div class="carousel-slide">
+                        <img src="../imagens carosel de imagens/WhatsApp Image 2025-10-19 at 16.38.24 (1).jpeg" alt="Imagem principal" class="carousel-image main">
+                        <img src="../imagens carosel de imagens/WhatsApp Image 2025-10-19 at 16.38.24.jpeg" alt="Imagem secundária" class="carousel-image secondary">
+                        <img src="../imagens carosel de imagens/WhatsApp Image 2025-10-19 at 16.38.25 (1).jpeg" alt="Imagem terciária" class="carousel-image tertiary">
+                    </div>
+                    <!-- Slides adicionais serão adicionados dinamicamente -->
+                </div>
+            </div>
+        </div>
+        <div class="image-section"><img src="4.png" alt="Seção 4"></div>
+        <div class="image-section"><img src="5.png" alt="Seção 5"></div>
+    </div>
+    <script>
+        // Navegação de retorno à Home ao clicar na imagem 1
+        document.addEventListener('DOMContentLoaded', function() {
+            // REMOVIDO: primeira imagem não é mais clicável
+
+            // Funcionalidade do carrossel
+            const slides = document.getElementById('carouselSlides');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            // Imagens para o carrossel com as imagens existentes
+            const carouselImages = [
+                {main: '../imagens carosel de imagens/Cópia de Foto-263.jpg', secondary: '../imagens carosel de imagens/Foto-22.jpg', tertiary: '../imagens carosel de imagens/Foto-24.jpg'},
+                {main: '../imagens carosel de imagens/Foto-25.jpg', secondary: '../imagens carosel de imagens/Foto-38.jpg', tertiary: '../imagens carosel de imagens/Foto-48.jpg'},
+                {main: '../imagens carosel de imagens/Foto-71.jpg', secondary: '../imagens carosel de imagens/Foto-75.jpg', tertiary: '../imagens carosel de imagens/Foto-76.jpg'},
+                {main: '../imagens carosel de imagens/Foto-79.jpg', secondary: '../imagens carosel de imagens/Foto-96.jpg', tertiary: '../imagens carosel de imagens/Foto-97.jpg'}
+            ];
+            
+            let currentSlide = 0;
+            
+            // Função para criar slides
+            function createSlide(imageSet) {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                
+                const mainImg = document.createElement('img');
+                mainImg.src = imageSet.main;
+                mainImg.alt = 'Imagem principal';
+                mainImg.className = 'carousel-image main';
+                
+                const secondaryImg = document.createElement('img');
+                secondaryImg.src = imageSet.secondary;
+                secondaryImg.alt = 'Imagem secundária';
+                secondaryImg.className = 'carousel-image secondary';
+                
+                const tertiaryImg = document.createElement('img');
+                tertiaryImg.src = imageSet.tertiary;
+                tertiaryImg.alt = 'Imagem terciária';
+                tertiaryImg.className = 'carousel-image tertiary';
+                
+                slide.appendChild(mainImg);
+                slide.appendChild(secondaryImg);
+                slide.appendChild(tertiaryImg);
+                
+                return slide;
+            }
+            
+            // Inicializar o carrossel com o primeiro slide
+            if(slides){
+                slides.innerHTML = '';
+                slides.appendChild(createSlide(carouselImages[0]));
+            }
+            
+            // Adicionar funcionalidade aos botões de navegação
+            if(prevBtn){
+                prevBtn.addEventListener('click', function() {
+                    currentSlide = (currentSlide - 1 + carouselImages.length) % carouselImages.length;
+                    slides.innerHTML = '';
+                    slides.appendChild(createSlide(carouselImages[currentSlide]));
+                });
+            }
+            
+            if(nextBtn){
+                nextBtn.addEventListener('click', function() {
+                    currentSlide = (currentSlide + 1) % carouselImages.length;
+                    slides.innerHTML = '';
+                    slides.appendChild(createSlide(carouselImages[currentSlide]));
+                });
+            }
+        });
+
+        // Navegação suave do menu
+        function setupSmoothNavigation() {
+            const menuItems = document.querySelectorAll('.menu-item[data-scroll]');
+            
+            menuItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = this.getAttribute('data-scroll');
+                    
+                    switch(target) {
+                        case 'home':
+                            // Ir para a home
+                            window.location.href = '../index.html';
+                            break;
+                            
+                        case 'programs':
+                            // Ir para home e rolar até programas
+                            window.location.href = '../index.html#programs';
+                            break;
+                            
+                        case 'blog':
+                            // Ir para home e rolar até blog
+                            window.location.href = '../index.html#blog';
+                            break;
+                            
+                        case 'contact':
+                            // Rolar até o rodapé da página atual (NÃO volta para home)
+                            const footer = document.querySelector('.image-section:last-child');
+                            if (footer) {
+                                footer.scrollIntoView({ 
+                                    behavior: 'smooth',
+                                    block: 'end'
+                                });
+                            }
+                            break;
+                    }
+                });
+            });
+        }
+
+        // Executar navegação suave
+        setTimeout(setupSmoothNavigation, 100);
+        setTimeout(setupSmoothNavigation, 500);
+        setTimeout(setupSmoothNavigation, 1000);
+    </script>
+</body>
+</html>

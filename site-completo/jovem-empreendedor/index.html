@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jovem Empreendedor</title>
+    <link rel="shortcut icon" href="../favicons/jovem emprendedor.png" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicons/jovem emprendedor.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        /* Primeira imagem com header sobreposto */
+        .header-section {
+            position: relative !important;
+        }
+
+        /* Container do conteúdo do header (menu + botão) */
+        .header-content {
+            position: absolute !important;
+            bottom: 20px !important;
+            right: 20px !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 30px !important;
+            z-index: 200 !important;
+        }
+
+        /* Menu de navegação */
+        .header-menu {
+            display: flex !important;
+            gap: 25px !important;
+            align-items: center !important;
+        }
+
+        .menu-item {
+            color: #ffffff !important;
+            text-decoration: none !important;
+            font-family: Arial, sans-serif !important;
+            font-size: 16px !important;
+            font-weight: 500 !important;
+            transition: color 0.3s ease !important;
+            white-space: nowrap !important;
+        }
+
+        .menu-item:hover {
+            color: #ff5e01 !important;
+        }
+
+        /* Botão Área do Aluno */
+        .davi-button-link {
+            transition: transform 0.3s ease !important;
+        }
+
+        .davi-button-link:hover {
+            transform: scale(1.05) !important;
+        }
+
+        .davi-button-link img {
+            width: 200px !important;
+            height: auto !important;
+            display: block !important;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+
+        .image-section {
+            width: 100%;
+            display: block;
+        }
+
+        .image-section img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-section:first-child {
+            position: relative;
+            z-index: 10;
+            margin-bottom: -30px;
+            width: 101%; /* Aumenta um pouquinho horizontalmente */
+            left: -0.5%; /* Centraliza após aumentar */
+        }
+        
+        .image-section:first-child img {
+            width: 100%;
+            height: auto;
+        }
+
+        .image-section:nth-child(2) {
+            position: relative;
+            z-index: 9;
+            margin-bottom: -30px;
+        }
+
+        .image-section:nth-child(3) {
+            position: relative;
+            overflow: hidden; /* Garante que os elementos animados não vazem */
+        }
+
+        .info-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3vw;
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: white;
+            font-family: 'Raleway', sans-serif;
+            opacity: 0;
+            animation: fadeInOverlay 1s ease-out 0.5s forwards;
+            overflow-y: auto;
+        }
+
+        @keyframes fadeInOverlay {
+            to { opacity: 1; }
+        }
+
+        .overlay-content {
+            max-width: 900px;
+            width: 100%;
+            text-align: left;
+            animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards;
+            transform: translateY(50px);
+            opacity: 0;
+        }
+
+        @keyframes slideInUp {
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .program-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 900;
+            color: #FF5E01;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(255, 94, 1, 0.3);
+        }
+
+        .program-subtitle {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 1rem;
+        }
+
+        .program-text {
+            font-size: clamp(1rem, 1.5vw, 1.1rem);
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .program-text ul {
+            list-style-position: inside;
+            padding-left: 1rem;
+        }
+
+        .program-text li {
+            margin-bottom: 1rem;
+        }
+
+        .image-section:nth-child(4) {
+            position: relative;
+            z-index: 8;
+            margin-bottom: -35px;
+            margin-top: 60px; /* Movido para baixo */
+        }
+        
+        /* Estilos para o carrossel de imagens */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            /* height: 397.43px; -> Removido para ser automático */
+            height: 397.43px;
+            margin: 0 auto;
+            background: #FF5E01;
+            border-radius: 17.472px;
+            overflow: hidden;
+        }
+        
+        .carousel-title {
+            position: absolute;
+            top: 30px;
+            left: 50px;
+            font-family: 'Raleway';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 27.9033px;
+            line-height: 33px;
+            letter-spacing: -0.06em;
+            color: #FFFFFF;
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 10;
+        }
+        
+        .carousel-nav-button {
+            width: 19.61px;
+            height: 41.48px;
+            border: 4px solid #FFFFFF;
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(45deg);
+        }
+        
+        .carousel-nav-button.prev {
+            border-top: none;
+            border-right: none;
+            transform: rotate(45deg);
+        }
+        
+        .carousel-nav-button.next {
+            border-bottom: none;
+            border-left: none;
+            transform: rotate(45deg);
+        }
+        
+        .carousel-slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .carousel-slide {
+            min-width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 50px;
+        }
+        
+        .carousel-image {
+            box-sizing: border-box;
+            border: 4px solid #FFFFFF;
+            height: auto;
+        }
+        
+        .carousel-image.main {
+            width: 440px;
+            height: 293px;
+            order: 2; /* Coloca a imagem principal no meio */
+            margin: 0 20px;
+        }
+        
+        .carousel-image.secondary {
+            width: 295px;
+            height: 195px;
+            order: 1; /* Coloca a imagem secundária à esquerda */
+            align-self: center;
+        }
+        
+        .carousel-image.tertiary {
+            width: 270px;
+            height: 195px;
+            order: 3; /* Coloca a imagem terciária à direita */
+            align-self: center;
+        }
+
+        .image-section:nth-child(5) {
+            position: relative;
+            z-index: 7;
+            margin-bottom: -35px;
+            margin-top: 60px; /* Movido para baixo */
+        }
+
+        .image-section:nth-child(6) {
+            position: relative;
+            z-index: 6;
+            margin-top: 30px;
+        }
+
+        .overlay-image {
+            position: absolute;
+            left: 3cm;
+            top: 65%;
+            transform: translateY(-50%);
+            z-index: 11;
+            max-width: 180px;
+            height: auto;
+        }
+        
+        /* Estilos para a nova seção Jovem Empreendedor */
+        .empreendedor-presentation {
+            background: linear-gradient(135deg, #fff 0%, #fff8f3 100%);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(255, 94, 1, 0.1);
+            margin: 30px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .empreendedor-presentation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255, 94, 1, 0.2) 0%, rgba(255, 94, 1, 0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .empreendedor-presentation::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 94, 1, 0.1) 0%, rgba(255, 94, 1, 0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .empreendedor-content {
+            padding: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .empreendedor-header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .empreendedor-logo {
+            width: 80px;
+            height: 80px;
+            background-color: #FF5E01;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 5px 15px rgba(255, 94, 1, 0.3);
+        }
+        
+        .logo-icon {
+            font-size: 40px;
+        }
+        
+        .empreendedor-title {
+            color: #FF5E01;
+            font-size: 3.5em;
+            font-weight: 800;
+            margin: 0 0 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .empreendedor-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #FF5E01;
+            border-radius: 2px;
+        }
+        
+        .empreendedor-tagline {
+            color: #333;
+            font-size: 1.4em;
+            font-weight: 500;
+            margin: 20px 0 0;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .empreendedor-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #555;
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        .empreendedor-intro p {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .empreendedor-intro::before {
+            content: '"';
+            position: absolute;
+            top: -40px;
+            left: 0;
+            font-size: 120px;
+            color: rgba(255, 94, 1, 0.1);
+            font-family: Georgia, serif;
+            z-index: 0;
+        }
+        
+        .empreendedor-intro::after {
+            content: '"';
+            position: absolute;
+            bottom: -80px;
+            right: 0;
+            font-size: 120px;
+            color: rgba(255, 94, 1, 0.1);
+            font-family: Georgia, serif;
+            z-index: 0;
+        }
+        
+        .empreendedor-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: #FF5E01;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 94, 1, 0.15);
+        }
+        
+        .card-icon {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            display: inline-block;
+            color: #FF5E01;
+        }
+        
+        .card-title {
+            color: #FF5E01;
+            font-size: 1.8em;
+            margin: 0 0 15px;
+            position: relative;
+        }
+        
+        .card-text {
+            color: #555;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .experience-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .highlight {
+            background-color: rgba(255, 94, 1, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .highlight:hover {
+            transform: scale(1.03);
+            background-color: rgba(255, 94, 1, 0.1);
+        }
+        
+        .highlight-icon {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .highlight h4 {
+            color: #FF5E01;
+            font-size: 1.3em;
+            margin: 0 0 10px;
+        }
+        
+        .highlight p {
+            color: #666;
+            font-size: 1em;
+            line-height: 1.5;
+            margin: 0;
+        }
+        
+        .empreendedor-cta {
+            background: linear-gradient(135deg, #FF5E01 0%, #FF8C01 100%);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .empreendedor-cta::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .empreendedor-cta::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .cta-text h3 {
+            font-size: 2em;
+            margin: 0 0 15px;
+            font-weight: 700;
+        }
+        
+        .cta-text p {
+            font-size: 1.2em;
+            margin: 0;
+            opacity: 0.9;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .empreendedor-content {
+                padding: 30px;
+            }
+            
+            .empreendedor-title {
+                font-size: 2.8em;
+            }
+            
+            .empreendedor-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .experience-highlights {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                bottom: 15px !important;
+                right: 15px !important;
+                gap: 20px !important;
+                flex-direction: column !important;
+                align-items: flex-end !important;
+            }
+
+            .header-menu {
+                gap: 15px !important;
+            }
+
+            .menu-item {
+                font-size: 14px !important;
+            }
+
+            .davi-button-link img {
+                width: 150px !important;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+            
+            .empreendedor-content {
+                padding: 20px;
+            }
+            
+            .empreendedor-title {
+                font-size: 2.2em;
+            }
+            
+            .empreendedor-tagline {
+                font-size: 1.2em;
+            }
+            
+            .empreendedor-intro {
+                font-size: 1.1em;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .card-title {
+                font-size: 1.5em;
+            }
+            
+            .cta-text h3 {
+                font-size: 1.6em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .empreendedor-logo {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .logo-icon {
+                font-size: 30px;
+            }
+            
+            .empreendedor-title {
+                font-size: 1.8em;
+            }
+            
+            .empreendedor-tagline {
+                font-size: 1em;
+            }
+            
+            .card-icon {
+                font-size: 2em;
+            }
+            
+            .empreendedor-cta {
+                padding: 25px;
+            }
+            
+            .cta-text h3 {
+                font-size: 1.4em;
+            }
+            
+            .cta-text p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-section header-section">
+            <img src="1.png" alt="Seção 1">
+            <div class="header-content">
+                <nav class="header-menu">
+                    <a href="#" class="menu-item" data-scroll="home">Home</a>
+                    <a href="#" class="menu-item" data-scroll="programs">Programas</a>
+                    <a href="#" class="menu-item" data-scroll="blog">Blog</a>
+                    <a href="#" class="menu-item" data-scroll="contact">Contato</a>
+                </nav>
+                <a href="https://educacao.institutomanager.com.br/" class="davi-button-link" target="_blank">
+                    <img src="BOTÃO JOVEM EMPREENDEDOR.png" alt="Área do Aluno">
+                </a>
+            </div>
+        </div>
+        <div class="image-section">
+            <img src="2.png" alt="Seção 2">
+        </div>
+        <div class="empreendedor-presentation">
+            <div class="empreendedor-content">
+                <div class="empreendedor-header">
+                    <div class="empreendedor-logo">
+                        <span class="logo-icon">🚀</span>
+                    </div>
+                    <h2 class="empreendedor-title">Jovem Empreendedor</h2>
+                    <p class="empreendedor-tagline">O maior programa de empreendedorismo para jovens da América Latina</p>
+                </div>
+                
+                <div class="empreendedor-intro">
+                    <p>Em parceria estratégica com a Google for Education, o programa Jovem Empreendedor foi cuidadosamente desenhado para ensinar os jovens não apenas a sonhar, mas a pensar e a criar suas próprias oportunidades.</p>
+                </div>
+                
+                <div class="empreendedor-cards">
+                    <div class="card metodologia">
+                        <div class="card-icon">📊</div>
+                        <h3 class="card-title">Metodologia Exclusiva</h3>
+                        <p class="card-text">Utilizando um conjunto de ferramentas Google, desenvolvemos uma metodologia de ensino exclusiva, na qual, ao longo do curso, cada aluno é desafiado a criar e desenvolver a sua própria startup. Eles aprendem na prática, mergulhando em todas as etapas do processo, desde a criação da identidade visual e do plano de marketing até a estruturação do modelo de vendas e gestão.</p>
+                    </div>
+                    
+                    <div class="card experiencias">
+                        <div class="card-icon">🌟</div>
+                        <h3 class="card-title">Experiências Práticas e Memoráveis</h3>
+                        <p class="card-text">O empreendedorismo é um campo dinâmico, e por isso, nossos alunos não ficam apenas na teoria. Além de dominar mais de 12 áreas do empreendedorismo, eles participam de experiências práticas e memoráveis.</p>
+                        
+                        <div class="experience-highlights">
+                            <div class="highlight">
+                                <span class="highlight-icon">💼</span>
+                                <h4>O Produto da Turma</h4>
+                                <p>Os alunos se unem para desenvolver e vender um produto ou serviço na comunidade, aprendendo sobre responsabilidade financeira na prática.</p>
+                            </div>
+                            
+                            <div class="highlight">
+                                <span class="highlight-icon">👨‍💼</span>
+                                <h4>O Startup Manager</h4>
+                                <p>Mentoria exclusiva com nosso CEO para estruturar projetos e ganhar confiança para transformar ideias em realidade.</p>
+                            </div>
+                            
+                            <div class="highlight">
+                                <span class="highlight-icon">🏆</span>
+                                <h4>Olimpíadas Jovem Empreendedor Google</h4>
+                                <p>Os vencedores apresentam seus projetos inovadores diretamente aos diretores da Google em São Paulo.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card manager-day">
+                        <div class="card-icon">🎯</div>
+                        <h3 class="card-title">Manager Day</h3>
+                        <p class="card-text">Todo o programa é uma preparação intensiva para a defesa dos projetos. Os alunos primeiro se destacam na etapa municipal e regional para, em seguida, representar seu município na grande final estadual. O ponto alto de toda essa jornada é o Manager Day, nosso maior evento de empreendedorismo. Nele, os jovens assistem a palestras com grandes empresários, desfrutam de shows ao vivo e participam da grande final das Olimpíadas.</p>
+                    </div>
+                </div>
+                
+                <div class="empreendedor-cta">
+                    <div class="cta-text">
+                        <h3>Transforme o futuro dos jovens com o poder do empreendedorismo</h3>
+                        <p>Uma jornada de descobertas, inovação e crescimento pessoal</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="image-section">
+            <div class="carousel-container">
+                <h3 class="carousel-title">Confira algumas imagens:</h3>
+                <div class="carousel-nav">
+                    <button class="carousel-nav-button prev" id="prevBtn"></button>
+                    <button class="carousel-nav-button next" id="nextBtn"></button>
+                </div>
+                <div class="carousel-slides" id="carouselSlides">
+                    <div class="carousel-slide">
+                        <img src="../imagens carosel de imagens/WhatsApp Image 2025-10-19 at 16.38.24 (1).jpeg" alt="Imagem principal" class="carousel-image main">
+                        <img src="../imagens carosel de imagens/WhatsApp Image 2025-10-19 at 16.38.24.jpeg" alt="Imagem secundária" class="carousel-image secondary">
+                        <img src="../imagens carosel de imagens/WhatsApp Image 2025-10-19 at 16.38.25 (1).jpeg" alt="Imagem terciária" class="carousel-image tertiary">
+                    </div>
+                    <!-- Slides adicionais serão adicionados dinamicamente -->
+                </div>
+            </div>
+        </div>
+        <div class="image-section">
+            <img src="5.png" alt="Seção 5">
+        </div>
+        <div class="image-section">
+            <img src="6.png" alt="Seção 6">
+        </div>
+    </div>
+    <script>
+        // Navegação de retorno à Home ao clicar na imagem 1
+        document.addEventListener('DOMContentLoaded', function() {
+            // REMOVIDO: primeira imagem não é mais clicável
+            
+            // Funcionalidade do carrossel
+            const slides = document.getElementById('carouselSlides');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            // Imagens para o carrossel com as imagens existentes
+            const carouselImages = [
+                {main: '../imagens carosel de imagens/Cópia de Foto-263.jpg', secondary: '../imagens carosel de imagens/Foto-22.jpg', tertiary: '../imagens carosel de imagens/Foto-24.jpg'},
+                {main: '../imagens carosel de imagens/Foto-25.jpg', secondary: '../imagens carosel de imagens/Foto-38.jpg', tertiary: '../imagens carosel de imagens/Foto-48.jpg'},
+                {main: '../imagens carosel de imagens/Foto-71.jpg', secondary: '../imagens carosel de imagens/Foto-75.jpg', tertiary: '../imagens carosel de imagens/Foto-76.jpg'},
+                {main: '../imagens carosel de imagens/Foto-79.jpg', secondary: '../imagens carosel de imagens/Foto-96.jpg', tertiary: '../imagens carosel de imagens/Foto-97.jpg'}
+            ];
+            
+            let currentSlide = 0;
+            
+            // Função para criar slides
+            function createSlide(imageSet) {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                
+                const mainImg = document.createElement('img');
+                mainImg.src = imageSet.main;
+                mainImg.alt = 'Imagem principal';
+                mainImg.className = 'carousel-image main';
+                
+                const secondaryImg = document.createElement('img');
+                secondaryImg.src = imageSet.secondary;
+                secondaryImg.alt = 'Imagem secundária';
+                secondaryImg.className = 'carousel-image secondary';
+                
+                const tertiaryImg = document.createElement('img');
+                tertiaryImg.src = imageSet.tertiary;
+                tertiaryImg.alt = 'Imagem terciária';
+                tertiaryImg.className = 'carousel-image tertiary';
+                
+                slide.appendChild(mainImg);
+                slide.appendChild(secondaryImg);
+                slide.appendChild(tertiaryImg);
+                
+                return slide;
+            }
+            
+            // Inicializar o carrossel com o primeiro slide
+            if(slides) {
+                slides.innerHTML = '';
+                slides.appendChild(createSlide(carouselImages[0]));
+            }
+            
+            // Adicionar funcionalidade aos botões de navegação
+            if(prevBtn) {
+                prevBtn.addEventListener('click', function() {
+                    currentSlide = (currentSlide - 1 + carouselImages.length) % carouselImages.length;
+                    slides.innerHTML = '';
+                    slides.appendChild(createSlide(carouselImages[currentSlide]));
+                });
+            }
+            
+            if(nextBtn) {
+                nextBtn.addEventListener('click', function() {
+                    currentSlide = (currentSlide + 1) % carouselImages.length;
+                    slides.innerHTML = '';
+                    slides.appendChild(createSlide(carouselImages[currentSlide]));
+                });
+            }
+        });
+
+        // Navegação suave do menu
+        function setupSmoothNavigation() {
+            const menuItems = document.querySelectorAll('.menu-item[data-scroll]');
+            
+            menuItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = this.getAttribute('data-scroll');
+                    
+                    switch(target) {
+                        case 'home':
+                            // Ir para a home
+                            window.location.href = '../index.html';
+                            break;
+                            
+                        case 'programs':
+                            // Ir para home e rolar até programas
+                            window.location.href = '../index.html#programs';
+                            break;
+                            
+                        case 'blog':
+                            // Ir para home e rolar até blog
+                            window.location.href = '../index.html#blog';
+                            break;
+                            
+                        case 'contact':
+                            // Rolar até o rodapé da página atual (NÃO volta para home)
+                            const footer = document.querySelector('.image-section:last-child');
+                            if (footer) {
+                                footer.scrollIntoView({ 
+                                    behavior: 'smooth',
+                                    block: 'end'
+                                });
+                            }
+                            break;
+                    }
+                });
+            });
+        }
+
+        // Executar navegação suave
+        setTimeout(setupSmoothNavigation, 100);
+        setTimeout(setupSmoothNavigation, 500);
+        setTimeout(setupSmoothNavigation, 1000);
+    </script>
+</body>
+</html>
